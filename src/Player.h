@@ -2,6 +2,7 @@
 #define PLAYER_H
 
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
@@ -16,11 +17,13 @@ class Player : public CharacterBody2D {
         static constexpr int FRICTION = 500;
 
         Vector2 velocity = Vector2();
+        AnimationPlayer* animationPlayer = nullptr;
 
     protected:
         static void _bind_methods();
 
     public:
+        void _ready() override;
         virtual void _physics_process(double delta) override;
     };
 
