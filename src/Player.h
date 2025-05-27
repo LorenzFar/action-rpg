@@ -11,8 +11,8 @@ class Player : public CharacterBody2D {
     GDCLASS(Player, CharacterBody2D);
 
     private:
-        static constexpr int MAX_SPEED = 500;
-        static constexpr int ACCELERATION = 100;
+        static constexpr int MAX_SPEED = 80;
+        static constexpr int ACCELERATION = 500;
         static constexpr int FRICTION = 500;
 
         Vector2 velocity = Vector2();
