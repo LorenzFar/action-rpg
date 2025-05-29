@@ -1,10 +1,12 @@
 #include "Player.h"
 #include <godot_cpp/classes/input.hpp>
+#include <godot_cpp/classes/input_map.hpp>
 #include <godot_cpp/classes/node.hpp>
 
 namespace godot {
 
     void Player::_bind_methods() {
+        ClassDB::bind_method(D_METHOD("attack_animation_finished"), &Player::attack_animation_finished);
     }
 
     void Player::_ready(){
@@ -53,9 +55,10 @@ namespace godot {
             //     animationPlayer->play("RunLeft");
             // }
 
-            //Set blend position for idle & run
+            //Set blend position for idle & run & attack (which position the player is pointing)
             animationTree->set("parameters/Idle/blend_position", input_vector);
             animationTree->set("parameters/Run/blend_position", input_vector);
+            animationTree->set("parameters/Attack/blend_position", input_vector);
 
             animationState->travel("Run");
 
@@ -68,9 +71,22 @@ namespace godot {
 
         set_velocity(velocity);
         move_and_slide();
+
+        if (InputMap::get_singleton()->has_action("attack") && Input::get_singleton()->is_action_just_pressed("attack")) {
+            state = ATTACK;
+        }
     }
 
-    void attack_state(double delta){
+    void Player::attack_state(double delta){
+        //UtilityFunctions::print("Now Attacking");
 
+        //reset velocity to prevent sliding after attack
+        velocity = Vector2();
+        animationState->travel("Attack");
+    }
+
+    void Player::attack_animation_finished(){
+        //UtilityFunctions::print("Attack animation finished called!");
+        state = MOVE;
     }
 }

@@ -34,6 +34,7 @@ class Player : public CharacterBody2D {
 
         void move_state(double delta);
         void attack_state(double delta);
+        void attack_animation_finished();
 
     protected:
         static void _bind_methods();
