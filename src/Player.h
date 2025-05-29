@@ -20,10 +20,20 @@ class Player : public CharacterBody2D {
         static constexpr int ACCELERATION = 500;
         static constexpr int FRICTION = 500;
 
+        enum {
+            MOVE,
+            ROLL,
+            ATTACK
+        };
+
         Vector2 velocity = Vector2();
         AnimationPlayer* animationPlayer = nullptr;
         AnimationTree* animationTree = nullptr;
         AnimationState* animationState = nullptr;
+        int state = MOVE;
+
+        void move_state(double delta);
+        void attack_state(double delta);
 
     protected:
         static void _bind_methods();

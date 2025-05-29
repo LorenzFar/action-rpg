@@ -14,9 +14,26 @@ namespace godot {
         animationState = Object::cast_to<AnimationState>(
             animationTree->get("parameters/playback").operator Object*()
         );
+
+        animationTree->set_active(true);
     }
 
     void Player::_physics_process(double delta) {
+        switch (state)
+        {
+        case MOVE:
+            move_state(delta);
+            break;
+        case ROLL:
+            break;
+        case ATTACK:
+            attack_state(delta);
+        default:
+            break;
+        }
+    }
+
+    void Player::move_state(double delta){
         Vector2 input_vector = Vector2();
 
         input_vector.x = Input::get_singleton()->get_action_strength("ui_right") - Input::get_singleton()->get_action_strength("ui_left");
@@ -51,5 +68,9 @@ namespace godot {
 
         set_velocity(velocity);
         move_and_slide();
+    }
+
+    void attack_state(double delta){
+
     }
 }
