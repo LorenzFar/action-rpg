@@ -10,6 +10,7 @@ namespace godot {
     }
 
     void Player::_ready(){
+
         animationPlayer = get_node<AnimationPlayer>("AnimationPlayer");
         animationTree = get_node<AnimationTree>("AnimationTree");
         
@@ -18,9 +19,11 @@ namespace godot {
         );
 
         animationTree->set_active(true);
+
+        set_process(true); // Ensure _process is called each frame
     }
 
-    void Player::_physics_process(double delta) {
+    void Player::_process(double delta) {
         switch (state)
         {
         case MOVE:

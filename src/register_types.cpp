@@ -6,6 +6,8 @@
 #include <godot_cpp/godot.hpp>
 
 #include "Player.h"
+#include "Grass.h"
+#include "GrassEffect.h"
 
 using namespace godot;
 
@@ -15,6 +17,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 		return;
 	}
 	GDREGISTER_CLASS(Player);
+	GDREGISTER_CLASS(Grass);
+	GDREGISTER_CLASS(GrassEffect);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

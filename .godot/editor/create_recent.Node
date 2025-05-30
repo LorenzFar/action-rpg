@@ -1,4 +1,7 @@
-TileMap
-Sprite2D
+GrassEffect
+AnimatedSprite2D
+Grass
 Node2D
+Sprite2D
+TileMap
 AnimationTree

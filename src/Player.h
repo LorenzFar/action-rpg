@@ -41,7 +41,7 @@ class Player : public CharacterBody2D {
 
     public:
         void _ready() override;
-        virtual void _physics_process(double delta) override;
+        virtual void _process(double delta) override;
     };
 
 }
