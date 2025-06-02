@@ -1,6 +1,7 @@
-[gd_scene load_steps=38 format=3 uid="uid://obfpoqjvfkti"]
+[gd_scene load_steps=40 format=3 uid="uid://obfpoqjvfkti"]
 
 [ext_resource type="Texture2D" uid="uid://dgixdl5h4nbom" path="res://assets/Player/Player.png" id="1_xg5j1"]
+[ext_resource type="PackedScene" uid="uid://drs51rpw4labo" path="res://assets/Overlap/hitbox.tscn" id="2_qm3y6"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rwgxs"]
 radius = 4.0
@@ -36,6 +37,30 @@ tracks/1/keys = {
 "method": &"attack_animation_finished"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_7a8rx"]
 resource_name = "AttackLeft"
@@ -66,6 +91,30 @@ tracks/1/keys = {
 "args": [],
 "method": &"attack_animation_finished"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.14159]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_ty0rd"]
@@ -98,6 +147,30 @@ tracks/1/keys = {
 "method": &"attack_animation_finished"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_okbsk"]
 resource_name = "AttackUp"
@@ -128,6 +201,30 @@ tracks/1/keys = {
 "args": [],
 "method": &"attack_animation_finished"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_vfaks"]
@@ -215,6 +312,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [37]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HitboxPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("HitboxPivot/SwordHitbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_cr3b8"]
@@ -404,8 +525,11 @@ states/Run/position = Vector2(601.5, 100.263)
 states/Start/position = Vector2(190.5, 100.072)
 transitions = ["Idle", "Run", SubResource("AnimationNodeStateMachineTransition_xg5j1"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_qm3y6"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_7gujn"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_2p6bb"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_vh163")]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qm3y6"]
+
 [node name="Player" type="Player"]
-position = Vector2(0, 2.63889)
+position = Vector2(-1.38146, 4)
+collision_layer = 2
 slide_on_ceiling = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -426,6 +550,20 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_kwwki")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Attack/blend_position = Vector2(0, 0)
-parameters/Idle/blend_position = Vector2(0, -1)
-parameters/Run/blend_position = Vector2(0, -1)
+parameters/Attack/blend_position = Vector2(-1, 0)
+parameters/Idle/blend_position = Vector2(-1, 0)
+parameters/Run/blend_position = Vector2(-1, 0)
+
+[node name="HitboxPivot" type="Marker2D" parent="."]
+position = Vector2(0, -4)
+gizmo_extents = 8.0
+
+[node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource("2_qm3y6")]
+position = Vector2(15, 0)
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
+shape = SubResource("CapsuleShape2D_qm3y6")
+disabled = true
+
+[editable path="HitboxPivot/SwordHitbox"]
