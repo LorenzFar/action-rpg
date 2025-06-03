@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://wj6c6k7lwoht"]
+
+[ext_resource type="Texture2D" uid="uid://bomdge160ixkn" path="res://assets/Enemies/Bat.png" id="1_sfnse"]
+[ext_resource type="Texture2D" uid="uid://dw1bo831jjvpm" path="res://assets/Shadows/SmallShadow.png" id="2_jekii"]
+[ext_resource type="PackedScene" uid="uid://q0bdkb2vd8n" path="res://assets/Overlap/hurtbox.tscn" id="3_jekii"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdiy1"]
+atlas = ExtResource("1_sfnse")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1ww1r"]
+atlas = ExtResource("1_sfnse")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lg3dp"]
+atlas = ExtResource("1_sfnse")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f1t7x"]
+atlas = ExtResource("1_sfnse")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mosdq"]
+atlas = ExtResource("1_sfnse")
+region = Rect2(64, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hygg8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sdiy1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1ww1r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lg3dp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f1t7x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mosdq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vplel"]
+radius = 4.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sdiy1"]
+radius = 6.0
+height = 18.0
+
+[node name="Bat" type="Bat"]
+collision_layer = 16
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_hygg8")
+autoplay = "default"
+frame_progress = 0.0172903
+offset = Vector2(0, -12)
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_jekii")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_vplel")
+
+[node name="Hurtbox" parent="." instance=ExtResource("3_jekii")]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -13)
+shape = SubResource("CapsuleShape2D_sdiy1")
+
+[editable path="Hurtbox"]

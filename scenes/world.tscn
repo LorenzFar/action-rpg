@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://p22qasxcdweh"]
+[gd_scene load_steps=13 format=3 uid="uid://p22qasxcdweh"]
 
 [ext_resource type="Texture2D" uid="uid://duw0j84rc863a" path="res://assets/World/GrassBackground.png" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cuyypa6bfkt8n" path="res://assets/World/bush.tscn" id="2_4wyf3"]
 [ext_resource type="Texture2D" uid="uid://b4qgba7s0hu0d" path="res://assets/World/CliffTileset.png" id="2_71j4m"]
 [ext_resource type="Texture2D" uid="uid://b3dh1sc4sac7l" path="res://assets/World/DirtTileset.png" id="2_k0juu"]
 [ext_resource type="PackedScene" uid="uid://obfpoqjvfkti" path="res://assets/Player/player.tscn" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://wj6c6k7lwoht" path="res://assets/Enemies/bat.tscn" id="4_i7141"]
 [ext_resource type="PackedScene" uid="uid://cot7oml1vpd2k" path="res://assets/World/grass.tscn" id="6_qfnet"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_71j4m"]
@@ -738,6 +739,15 @@ layer_0/tile_data = PackedInt32Array(-65528, 0, 0, -65527, 131072, 0, 9, 131072,
 
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
+
+[node name="Bat3" parent="YSort" instance=ExtResource("4_i7141")]
+position = Vector2(168, 24)
+
+[node name="Bat2" parent="YSort" instance=ExtResource("4_i7141")]
+position = Vector2(184, 160)
+
+[node name="Bat" parent="YSort" instance=ExtResource("4_i7141")]
+position = Vector2(240, 88)
 
 [node name="Player" parent="YSort" instance=ExtResource("2_rwgxs")]
 position = Vector2(64, 80)
