@@ -19,6 +19,7 @@ class Player : public CharacterBody2D {
         static constexpr int MAX_SPEED = 80;
         static constexpr int ACCELERATION = 500;
         static constexpr int FRICTION = 500;
+        static constexpr int ROLL_SPEED = 125;
 
         enum {
             MOVE,
@@ -27,14 +28,23 @@ class Player : public CharacterBody2D {
         };
 
         Vector2 velocity = Vector2();
+        Vector2 roll_vector = Vector2(1, 0);
+        
         AnimationPlayer* animationPlayer = nullptr;
         AnimationTree* animationTree = nullptr;
         AnimationState* animationState = nullptr;
+
         int state = MOVE;
 
         void move_state(double delta);
+
         void attack_state(double delta);
         void attack_animation_finished();
+
+        void roll_animation_finished();
+        void roll_state(double delta);
+
+        void move();
 
     protected:
         static void _bind_methods();

@@ -7,6 +7,7 @@ namespace godot {
 
     void Player::_bind_methods() {
         ClassDB::bind_method(D_METHOD("attack_animation_finished"), &Player::attack_animation_finished);
+        ClassDB::bind_method(D_METHOD("roll_animation_finished"), &Player::roll_animation_finished);
     }
 
     void Player::_ready(){
@@ -30,6 +31,7 @@ namespace godot {
             move_state(delta);
             break;
         case ROLL:
+            roll_state(delta);
             break;
         case ATTACK:
             attack_state(delta);
@@ -57,11 +59,14 @@ namespace godot {
             // else{
             //     animationPlayer->play("RunLeft");
             // }
+            
+            roll_vector = input_vector;
 
             //Set blend position for idle & run & attack (which position the player is pointing)
             animationTree->set("parameters/Idle/blend_position", input_vector);
             animationTree->set("parameters/Run/blend_position", input_vector);
             animationTree->set("parameters/Attack/blend_position", input_vector);
+            animationTree->set("parameters/Roll/blend_position", input_vector);
 
             animationState->travel("Run");
 
@@ -72,8 +77,11 @@ namespace godot {
             velocity = velocity.move_toward(Vector2(), FRICTION * delta);
         }
 
-        set_velocity(velocity);
-        move_and_slide();
+        move();
+
+        if (InputMap::get_singleton()->has_action("roll") && Input::get_singleton()->is_action_just_pressed("roll")) {
+            state = ROLL;
+        }
 
         if (InputMap::get_singleton()->has_action("attack") && Input::get_singleton()->is_action_just_pressed("attack")) {
             state = ATTACK;
@@ -88,8 +96,24 @@ namespace godot {
         animationState->travel("Attack");
     }
 
+    void Player::roll_state(double delta){
+        velocity = roll_vector * ROLL_SPEED;
+        animationState -> travel("Roll");
+        move();
+    }
+
+    void Player::move(){
+        set_velocity(velocity);
+        move_and_slide();
+    }
+
     void Player::attack_animation_finished(){
         //UtilityFunctions::print("Attack animation finished called!");
+        state = MOVE;
+    }
+
+    void Player::roll_animation_finished(){
+        velocity = velocity * 0.8;
         state = MOVE;
     }
 }

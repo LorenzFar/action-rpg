@@ -740,7 +740,7 @@ layer_0/tile_data = PackedInt32Array(-65528, 0, 0, -65527, 131072, 0, 9, 131072,
 y_sort_enabled = true
 
 [node name="Player" parent="YSort" instance=ExtResource("2_rwgxs")]
-position = Vector2(90.0111, 100.928)
+position = Vector2(64, 80)
 
 [node name="Bushes" type="Node2D" parent="YSort"]
 y_sort_enabled = true

@@ -1,5 +1,2 @@
-res://assets/Player/player.tscn
 res://scenes/world.tscn
-res://assets/Overlap/hitbox.tscn
-res://assets/Overlap/hurtbox.tscn
-res://assets/World/grass.tscn
+res://assets/Player/player.tscn
