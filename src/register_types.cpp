@@ -7,7 +7,7 @@
 
 #include "Player.h"
 #include "Grass.h"
-#include "GrassEffect.h"
+#include "Effect.h"
 #include "Bat.h"
 #include "Stats.h"
 #include "Hitbox.h"
@@ -21,7 +21,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	}
 	GDREGISTER_CLASS(Player);
 	GDREGISTER_CLASS(Grass);
-	GDREGISTER_CLASS(GrassEffect);
+	GDREGISTER_CLASS(Effect);
 	GDREGISTER_CLASS(Bat);
 	GDREGISTER_CLASS(Stats);
 	GDREGISTER_CLASS(Hitbox);

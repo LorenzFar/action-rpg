@@ -710,10 +710,10 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_kwwki")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Attack/blend_position = Vector2(-1, 0)
-parameters/Idle/blend_position = Vector2(0.00190115, -0.00263798)
-parameters/Roll/blend_position = Vector2(0.000950575, 0.00263786)
-parameters/Run/blend_position = Vector2(-1, 0)
+parameters/Attack/blend_position = Vector2(0, 1)
+parameters/Idle/blend_position = Vector2(0, 1)
+parameters/Roll/blend_position = Vector2(0, 1)
+parameters/Run/blend_position = Vector2(0, 1)
 
 [node name="HitboxPivot" type="Marker2D" parent="."]
 position = Vector2(0, -4)

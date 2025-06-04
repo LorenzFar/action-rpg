@@ -43,18 +43,13 @@ animations = [{
 "loop": false,
 "name": &"Animation",
 "speed": 15.0
-}, {
-"frames": [],
-"loop": true,
-"name": &"default",
-"speed": 5.0
 }]
 
-[node name="GrassEffect" type="GrassEffect"]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="GrassEffect" type="Effect"]
 sprite_frames = SubResource("SpriteFrames_j0v1e")
 animation = &"Animation"
 autoplay = "Animation"
+frame = 4
+frame_progress = 1.0
 centered = false
 offset = Vector2(-8, -8)

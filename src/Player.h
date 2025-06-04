@@ -28,7 +28,7 @@ class Player : public CharacterBody2D {
         };
 
         Vector2 velocity = Vector2();
-        Vector2 roll_vector = Vector2(1, 0);
+        Vector2 roll_vector = Vector2(0, 1);
         
         AnimationPlayer* animationPlayer = nullptr;
         AnimationTree* animationTree = nullptr;

@@ -1,6 +1,7 @@
 #include "Grass.h"
 
 #include <godot_cpp/classes/resource_loader.hpp> 
+#include <godot_cpp/classes/animated_sprite2d.hpp>
 #include <godot_cpp/classes/packed_scene.hpp> 
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_map.hpp>
@@ -32,14 +33,14 @@ namespace godot {
         }
 
         Node *grassEffectNode = grassEffectScene->instantiate();
-        Node2D *grassEffect = Object::cast_to<Node2D>(grassEffectNode);
+        AnimatedSprite2D *grassEffect = Object::cast_to<AnimatedSprite2D>(grassEffectNode);
         if (!grassEffect) {
-            UtilityFunctions::print("GrassEffect is not a Node2D.");
+            UtilityFunctions::print("GrassEffect is not a AnimatedSprite2D.");
             return;
         }
 
         // Append to current scene
-        get_tree()->get_current_scene()->add_child(grassEffect);
+        get_parent() -> get_parent() -> add_child(grassEffect);
 
         // Position effect at the current grass node's global position
         grassEffect->set_global_position(get_global_position());
@@ -49,4 +50,5 @@ namespace godot {
         create_grass_effect();
         queue_free();
     }
+
 }

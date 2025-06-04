@@ -740,6 +740,9 @@ layer_0/tile_data = PackedInt32Array(-65528, 0, 0, -65527, 131072, 0, 9, 131072,
 [node name="YSort" type="Node2D" parent="."]
 y_sort_enabled = true
 
+[node name="Player" parent="YSort" instance=ExtResource("2_rwgxs")]
+position = Vector2(72, 80)
+
 [node name="Bat3" parent="YSort" instance=ExtResource("4_i7141")]
 position = Vector2(168, 24)
 
@@ -748,9 +751,6 @@ position = Vector2(184, 160)
 
 [node name="Bat" parent="YSort" instance=ExtResource("4_i7141")]
 position = Vector2(240, 88)
-
-[node name="Player" parent="YSort" instance=ExtResource("2_rwgxs")]
-position = Vector2(64, 80)
 
 [node name="Bushes" type="Node2D" parent="YSort"]
 y_sort_enabled = true
@@ -771,39 +771,52 @@ position = Vector2(264, 112)
 position = Vector2(176, 96)
 
 [node name="Grass" type="Node2D" parent="YSort"]
+y_sort_enabled = true
 
 [node name="Grass11" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(280, 32)
 
 [node name="Grass7" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(264, 32)
 
 [node name="Grass" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(240, 160)
 
 [node name="Grass2" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(304, 80)
 
 [node name="Grass3" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(80, 112)
 
 [node name="Grass4" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(24, 32)
 
 [node name="Grass5" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(8, 32)
 
 [node name="Grass6" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(224, 160)
 
 [node name="Grass8" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(128, 32)
 
 [node name="Grass9" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(112, 32)
 
 [node name="Grass10" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(128, 48)
 
 [node name="Grass12" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
+y_sort_enabled = true
 position = Vector2(64, 112)

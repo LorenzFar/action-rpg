@@ -20,6 +20,8 @@ class Bat : public CharacterBody2D {
         Area2D* area2D = nullptr; 
         Stats* stats = nullptr;
 
+        void create_death_effect();
+
     protected:
         static void _bind_methods();
 

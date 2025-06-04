@@ -1,5 +1,10 @@
 #include "Bat.h"
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/resource_loader.hpp> 
+#include <godot_cpp/classes/packed_scene.hpp> 
+#include <godot_cpp/classes/scene_tree.hpp>
+#include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/animated_sprite2d.hpp>
 
 namespace godot {
 
@@ -39,7 +44,30 @@ namespace godot {
         knockBack = direction * KNOCKBACK_SPEED;
     }
 
+    void Bat::create_death_effect(){
+        Ref<PackedScene> deathEffectScene = ResourceLoader::get_singleton()->load("res://assets/Effects/enemy_death_effect.tscn");
+        if (deathEffectScene.is_null()) {
+            UtilityFunctions::print("Failed to load deathEffect scene.");
+            return;
+        }
+
+        Node *deathEffectNode = deathEffectScene->instantiate();
+        AnimatedSprite2D *deathEffect = Object::cast_to<AnimatedSprite2D>(deathEffectNode);
+        if (!deathEffect) {
+            UtilityFunctions::print("deathEffect is not a AnimatedSprite2D.");
+            return;
+        }
+
+        // Append to current scene
+        get_parent() -> add_child(deathEffect);
+
+        // Position effect at the current bat node's global position
+        deathEffect->set_global_position(get_global_position());
+    }
+
     void Bat::_on_Stats_no_health(){
         queue_free();
+        create_death_effect();
     }
+
 }
