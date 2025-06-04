@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://drs51rpw4labo"]
 
-[node name="Hitbox" type="Area2D"]
+[node name="Hitbox" type="Hitbox"]
 collision_layer = 0
 collision_mask = 0
 

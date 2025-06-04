@@ -9,6 +9,8 @@
 #include "Grass.h"
 #include "GrassEffect.h"
 #include "Bat.h"
+#include "Stats.h"
+#include "Hitbox.h"
 
 using namespace godot;
 
@@ -21,6 +23,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(Grass);
 	GDREGISTER_CLASS(GrassEffect);
 	GDREGISTER_CLASS(Bat);
+	GDREGISTER_CLASS(Stats);
+	GDREGISTER_CLASS(Hitbox);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
