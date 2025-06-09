@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://q0bdkb2vd8n"]
 
-[node name="Hurtbox" type="Area2D"]
+[node name="Hurtbox" type="Hurtbox"]
 collision_layer = 0
 collision_mask = 0
 

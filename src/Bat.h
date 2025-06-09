@@ -3,7 +3,9 @@
 
 #include "Hitbox.h"
 #include "Stats.h"
+#include "PlayerDetectionZone.h"
 #include <godot_cpp/classes/character_body2d.hpp>
+#include <godot_cpp/classes/animated_sprite2d.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 #include <godot_cpp/classes/area2d.hpp>
@@ -14,11 +16,24 @@ class Bat : public CharacterBody2D {
     GDCLASS(Bat, CharacterBody2D);
 
     static constexpr int KNOCKBACK_SPEED = 120;
+    static constexpr int MAX_SPEED = 50;
+    static constexpr int ACCELERATION = 300;
+    static constexpr int FRICTION = 200; 
+
+    enum {
+        IDLE,
+        WANDER,
+        CHASE
+    };
 
     private:
+        Vector2 velocity = Vector2();
         Vector2 knockBack = Vector2();
         Area2D* area2D = nullptr; 
+        AnimatedSprite2D* animatedSprite2D = nullptr;
+        PlayerDetectionZone* playerDetectionZone = nullptr;
         Stats* stats = nullptr;
+        int state = CHASE;
 
         void create_death_effect();
 
@@ -30,6 +45,7 @@ class Bat : public CharacterBody2D {
         virtual void _physics_process(double delta) override;
         void _on_area_entered(Hitbox* area);
         void _on_Stats_no_health();
+        void seek_player();
     };
 
 }

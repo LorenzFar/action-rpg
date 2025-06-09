@@ -16,6 +16,8 @@ namespace godot {
     void Bat::_ready(){
         area2D = get_node<Area2D>("Hurtbox");
         stats = get_node<Stats>("Stats");
+        playerDetectionZone = get_node<PlayerDetectionZone>("PlayerDetectionZone");
+        animatedSprite2D = get_node<AnimatedSprite2D>("AnimatedSprite2D");
         
         area2D -> connect(
             "area_entered",
@@ -30,9 +32,41 @@ namespace godot {
     }
 
     void Bat::_physics_process(double delta) {
-        knockBack = knockBack.move_toward(Vector2(), 200 * delta);
+        knockBack = knockBack.move_toward(Vector2(), FRICTION * delta);
         set_velocity(knockBack);
         move_and_slide();
+
+        switch (state)
+        {
+        case IDLE:
+            velocity = velocity.move_toward(Vector2(), FRICTION * delta);
+            seek_player();
+            break;
+        case WANDER:
+            break;
+        case CHASE:
+            if(playerDetectionZone -> can_see_player()){
+                Player* player = playerDetectionZone -> getPlayer();
+                Vector2 direction = (player -> get_global_position() - get_global_position()).normalized();
+                velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
+            }
+            else{
+                state = IDLE;
+            }
+            //Flip Animation if player on the right side 
+            animatedSprite2D->set_flip_h(velocity.x < 0);
+        default:
+            break;
+        }
+
+        set_velocity(velocity);
+        move_and_slide();
+    }
+
+    void Bat::seek_player(){
+        if(playerDetectionZone -> can_see_player()){
+            state = CHASE;
+        }
     }
 
     void Bat::_on_area_entered(Hitbox* area) {

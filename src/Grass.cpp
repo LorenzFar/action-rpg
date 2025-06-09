@@ -6,8 +6,6 @@
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_map.hpp>
 #include <godot_cpp/classes/node.hpp>
-#include <godot_cpp/classes/scene_tree.hpp>
-#include <godot_cpp/classes/engine.hpp>
 
 namespace godot {
 

@@ -720,7 +720,6 @@ position = Vector2(0, -4)
 gizmo_extents = 8.0
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource("2_qm3y6")]
-damage = 3
 position = Vector2(15, 0)
 collision_layer = 8
 

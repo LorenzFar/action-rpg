@@ -11,6 +11,8 @@
 #include "Bat.h"
 #include "Stats.h"
 #include "Hitbox.h"
+#include "Hurtbox.h"
+#include "PlayerDetectionZone.h"
 
 using namespace godot;
 
@@ -25,6 +27,8 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(Bat);
 	GDREGISTER_CLASS(Stats);
 	GDREGISTER_CLASS(Hitbox);
+	GDREGISTER_CLASS(Hurtbox);
+	GDREGISTER_CLASS(PlayerDetectionZone);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {
