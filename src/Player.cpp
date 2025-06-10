@@ -2,21 +2,38 @@
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_map.hpp>
 #include <godot_cpp/classes/node.hpp>
+#include <godot_cpp/classes/scene_tree.hpp>
+#include <godot_cpp/classes/engine.hpp>
+#include <godot_cpp/classes/window.hpp>
 
 namespace godot {
 
     void Player::_bind_methods() {
         ClassDB::bind_method(D_METHOD("attack_animation_finished"), &Player::attack_animation_finished);
+        ClassDB::bind_method(D_METHOD("_on_area_entered", "area"), &Player::_on_area_entered);
         ClassDB::bind_method(D_METHOD("roll_animation_finished"), &Player::roll_animation_finished);
     }
 
     void Player::_ready(){
-
         animationPlayer = get_node<AnimationPlayer>("AnimationPlayer");
         animationTree = get_node<AnimationTree>("AnimationTree");
-        
+        hurtbox = get_node<Hurtbox>("Hurtbox");
+        stats = get_node<Stats>(NodePath("/root/PlayerStats"));
+
         animationState = Object::cast_to<AnimationState>(
             animationTree->get("parameters/playback").operator Object*()
+        );
+        
+        if(stats){
+            stats -> connect(
+                "no_health",
+                Callable(this, "queue_free")
+            );
+        }
+
+        hurtbox -> connect(
+            "area_entered",
+            Callable(this, "_on_area_entered")
         );
 
         animationTree->set_active(true);
@@ -116,4 +133,11 @@ namespace godot {
         velocity = velocity * 0.8;
         state = MOVE;
     }
+
+    void Player::_on_area_entered(Hitbox* area) {
+        stats->setHealth(stats -> getHealth() - 1);
+        hurtbox -> start_invincibility(0.5);
+        hurtbox -> create_hit_effect();
+    }
+
 }

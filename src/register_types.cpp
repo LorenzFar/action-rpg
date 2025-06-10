@@ -21,11 +21,12 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	if (p_level != MODULE_INITIALIZATION_LEVEL_SCENE) {
 		return;
 	}
+
+	GDREGISTER_CLASS(Stats);
 	GDREGISTER_CLASS(Player);
 	GDREGISTER_CLASS(Grass);
 	GDREGISTER_CLASS(Effect);
 	GDREGISTER_CLASS(Bat);
-	GDREGISTER_CLASS(Stats);
 	GDREGISTER_CLASS(Hitbox);
 	GDREGISTER_CLASS(Hurtbox);
 	GDREGISTER_CLASS(PlayerDetectionZone);

@@ -12,43 +12,73 @@ namespace godot {
 
     // Make sure class name matches header (you had Hitbox vs Hurtbox)
     void Hurtbox::_bind_methods() {
-        ClassDB::bind_method(D_METHOD("_on_area_entered", "area"), &Hurtbox::_on_area_entered);
+        ClassDB::bind_method(D_METHOD("_on_Hurtbox_invincibility_started"), &Hurtbox::_on_Hurtbox_invincibility_started);
+        ClassDB::bind_method(D_METHOD("_on_Hurtbox_invincibility_ended"), &Hurtbox::_on_Hurtbox_invincibility_ended);
+        ClassDB::bind_method(D_METHOD("_on_Timer_timeout"), &Hurtbox::_on_Timer_timeout);
         
-        ClassDB::bind_method(D_METHOD("set_show_hit", "value"), &Hurtbox::set_show_hit);
-        ClassDB::bind_method(D_METHOD("get_show_hit"), &Hurtbox::get_show_hit);
-
-        ADD_PROPERTY(PropertyInfo(Variant::BOOL, "show_hit"), "set_show_hit", "get_show_hit");
+        ADD_SIGNAL(MethodInfo("invincibility_started"));
+        ADD_SIGNAL(MethodInfo("invincibility_ended"));
     }
     
     //This is necessary as a fallback in case godot is not fully loaded
     Ref<PackedScene> Hurtbox::hitEffectScene = nullptr;
 
     void Hurtbox::_ready() {
-        connect(
-            "area_entered", 
-            Callable(this, "_on_area_entered")
+        timer = get_node<Timer>("Timer");
+
+        timer -> connect(
+            "timeout",
+            Callable(this, "_on_Timer_timeout")
+        );
+
+        connect (
+            "invincibility_started",
+            Callable(this, "_on_Hurtbox_invincibility_started")
+        );
+
+        connect (
+            "invincibility_ended",
+            Callable(this, "_on_Hurtbox_invincibility_ended")
         );
     }
 
-    void Hurtbox::_on_area_entered(Area2D* area) {
-        if(show_hit){
-            hitEffectScene = ResourceLoader::get_singleton()->load("res://assets/Effects/hit_effect.tscn");
-            Node* hitEffectNode = hitEffectScene -> instantiate();
-            Effect* hitEffect = Object::cast_to<Effect>(hitEffectNode);
+    void Hurtbox::start_invincibility(double duration){
+        set_invincible(true);
+        timer -> start(duration);
+    }
 
-            Node* main_scene = get_tree() -> get_current_scene();
+    void Hurtbox::set_invincible(bool value){
+        invincible = value;
 
-            main_scene -> add_child(hitEffect);
-            hitEffect -> set_global_position(get_global_position());
+        if(invincible){
+            emit_signal("invincibility_started");
+        }
+        else{
+            emit_signal("invincibility_ended");
         }
     }
 
-    bool Hurtbox::get_show_hit() const{
-        return show_hit;
+    void Hurtbox::create_hit_effect() {
+        hitEffectScene = ResourceLoader::get_singleton()->load("res://assets/Effects/hit_effect.tscn");
+        Node* hitEffectNode = hitEffectScene -> instantiate();
+        Effect* hitEffect = Object::cast_to<Effect>(hitEffectNode);
+
+        Node* main_scene = get_tree() -> get_current_scene();
+
+        main_scene -> add_child(hitEffect);
+        hitEffect -> set_global_position(get_global_position());
     }
 
-    void Hurtbox::set_show_hit(bool value) {
-        show_hit = value;
+    void Hurtbox::_on_Timer_timeout(){
+        set_invincible(false);
+    }
+
+    void Hurtbox::_on_Hurtbox_invincibility_started(){
+        set_deferred("monitoring", false);
+    }
+
+    void Hurtbox::_on_Hurtbox_invincibility_ended(){
+        set_deferred("monitoring", true);
     }
 
 } // namespace godot

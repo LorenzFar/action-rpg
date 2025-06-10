@@ -1,3 +1,4 @@
-res://assets/Player/player_stats.tscn
 res://scenes/world.tscn
 res://assets/Player/player.tscn
+res://assets/Enemies/bat.tscn
+res://assets/Overlap/hurtbox.tscn

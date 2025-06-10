@@ -2,6 +2,7 @@
 #define HURTBOX_H
 
 #include <godot_cpp/classes/area2d.hpp>
+#include <godot_cpp/classes/timer.hpp>
 #include <godot_cpp/classes/packed_scene.hpp> 
 
 namespace godot {
@@ -14,15 +15,19 @@ protected:
 
 public:
     void _ready() override;
-    
-    bool get_show_hit() const;
-    void set_show_hit(bool value);
+
+    void set_invincible(bool value);
+    void create_hit_effect();
+    void start_invincibility(double duration);
+
+    void _on_Timer_timeout();
+    void _on_Hurtbox_invincibility_started();
+    void _on_Hurtbox_invincibility_ended();
 
 private:
+    Timer* timer = nullptr;
+    bool invincible = false;
     static Ref<PackedScene> hitEffectScene;
-    bool show_hit = true;
-    
-    void _on_area_entered(Area2D* area);
 };
 
 } // namespace godot

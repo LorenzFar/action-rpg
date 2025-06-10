@@ -1,11 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "Hitbox.h"
+#include "Hurtbox.h"
+#include "Stats.h"
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/classes/animation_tree.hpp>
 #include <godot_cpp/classes/animation_node_state_machine_playback.hpp>
 #include <godot_cpp/core/class_db.hpp>
+#include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 
 namespace godot {
@@ -30,6 +34,8 @@ class Player : public CharacterBody2D {
         Vector2 velocity = Vector2();
         Vector2 roll_vector = Vector2(0, 1);
         
+        Stats* stats = nullptr;
+        Hurtbox* hurtbox = nullptr;
         AnimationPlayer* animationPlayer = nullptr;
         AnimationTree* animationTree = nullptr;
         AnimationState* animationState = nullptr;
@@ -52,6 +58,7 @@ class Player : public CharacterBody2D {
     public:
         void _ready() override;
         virtual void _process(double delta) override;
+        void _on_area_entered(Hitbox* area);
     };
 
 }

@@ -1,3 +1,4 @@
+Timer
 PlayerDetectionZone
 CollisionShape2D
 Area2D
@@ -12,4 +13,3 @@ Sprite2D
 AnimatedSprite2D
 Marker2D
 Grass
-TileMap

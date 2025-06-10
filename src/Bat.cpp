@@ -14,12 +14,12 @@ namespace godot {
     }
 
     void Bat::_ready(){
-        area2D = get_node<Area2D>("Hurtbox");
+        hurtbox = get_node<Hurtbox>("Hurtbox");
         stats = get_node<Stats>("Stats");
         playerDetectionZone = get_node<PlayerDetectionZone>("PlayerDetectionZone");
         animatedSprite2D = get_node<AnimatedSprite2D>("AnimatedSprite2D");
         
-        area2D -> connect(
+        hurtbox -> connect(
             "area_entered",
             Callable(this, "_on_area_entered")
         );
@@ -76,6 +76,8 @@ namespace godot {
 
         Vector2 direction = (get_position() - owner_node->get_position()).normalized();
         knockBack = direction * KNOCKBACK_SPEED;
+
+        hurtbox -> create_hit_effect();
     }
 
     void Bat::create_death_effect(){
