@@ -18,6 +18,7 @@ namespace godot {
         stats = get_node<Stats>("Stats");
         playerDetectionZone = get_node<PlayerDetectionZone>("PlayerDetectionZone");
         animatedSprite2D = get_node<AnimatedSprite2D>("AnimatedSprite2D");
+        softCollision = get_node<SoftCollision>("SoftCollision");
         
         hurtbox -> connect(
             "area_entered",
@@ -57,6 +58,10 @@ namespace godot {
             animatedSprite2D->set_flip_h(velocity.x < 0);
         default:
             break;
+        }
+
+        if(softCollision -> is_colliding()){
+            velocity += softCollision -> get_push_vector() * delta * 400;
         }
 
         set_velocity(velocity);

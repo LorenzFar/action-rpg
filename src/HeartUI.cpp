@@ -34,7 +34,7 @@ void HeartUI::_ready() {
 }
 
 void HeartUI::set_hearts(int value) {
-    hearts = CLAMP(value, 1, max_hearts);
+    hearts = CLAMP(value, 0, max_hearts);
     if (heartUIFull) {
         Vector2 size = heartUIFull->get_size();
         size.x = hearts * 15;

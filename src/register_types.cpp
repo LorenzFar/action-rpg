@@ -14,6 +14,7 @@
 #include "Hurtbox.h"
 #include "PlayerDetectionZone.h"
 #include "HeartUI.h"
+#include "SoftCollision.h"
 
 using namespace godot;
 
@@ -32,6 +33,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(Hurtbox);
 	GDREGISTER_CLASS(HeartUI);
 	GDREGISTER_CLASS(PlayerDetectionZone);
+	GDREGISTER_CLASS(SoftCollision);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

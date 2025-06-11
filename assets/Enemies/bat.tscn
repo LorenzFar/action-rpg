@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://wj6c6k7lwoht"]
+[gd_scene load_steps=19 format=3 uid="uid://wj6c6k7lwoht"]
 
 [ext_resource type="Texture2D" uid="uid://bomdge160ixkn" path="res://assets/Enemies/Bat.png" id="1_sfnse"]
 [ext_resource type="Texture2D" uid="uid://dw1bo831jjvpm" path="res://assets/Shadows/SmallShadow.png" id="2_jekii"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bd6fje0loxdhb" path="res://scenes/stats.tscn" id="4_sdiy1"]
 [ext_resource type="PackedScene" uid="uid://bt5a21bioy1gu" path="res://assets/Enemies/player_detection_zone.tscn" id="5_1ww1r"]
 [ext_resource type="PackedScene" uid="uid://drs51rpw4labo" path="res://assets/Overlap/hitbox.tscn" id="6_lg3dp"]
+[ext_resource type="PackedScene" uid="uid://consgwiixur3b" path="res://assets/Overlap/soft_collision.tscn" id="7_f1t7x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sdiy1"]
 atlas = ExtResource("1_sfnse")
@@ -63,6 +64,9 @@ radius = 64.0312
 [sub_resource type="CircleShape2D" id="CircleShape2D_f1t7x"]
 radius = 4.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_mosdq"]
+radius = 5.0
+
 [node name="Bat" type="Bat"]
 collision_layer = 16
 
@@ -103,6 +107,12 @@ collision_layer = 4
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_f1t7x")
 
+[node name="SoftCollision" parent="." instance=ExtResource("7_f1t7x")]
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource("CircleShape2D_mosdq")
+
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]
 [editable path="Hitbox"]
+[editable path="SoftCollision"]

@@ -3,6 +3,7 @@
 
 #include "Hitbox.h"
 #include "Hurtbox.h"
+#include "SoftCollision.h"
 #include "Stats.h"
 #include "PlayerDetectionZone.h"
 #include <godot_cpp/classes/character_body2d.hpp>
@@ -31,6 +32,7 @@ class Bat : public CharacterBody2D {
         Vector2 velocity = Vector2();
         Vector2 knockBack = Vector2();
         Hurtbox* hurtbox = nullptr;
+        SoftCollision* softCollision = nullptr;
         AnimatedSprite2D* animatedSprite2D = nullptr;
         PlayerDetectionZone* playerDetectionZone = nullptr;
         Stats* stats = nullptr;
