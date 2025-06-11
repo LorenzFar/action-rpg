@@ -1,4 +1,6 @@
 res://scenes/world.tscn
+res://assets/UI/HeartUI.tscn
+res://assets/Player/player_stats.tscn
+res://assets/World/bush.tscn
 res://assets/Player/player.tscn
-res://assets/Enemies/bat.tscn
-res://assets/Overlap/hurtbox.tscn
+res://assets/World/tree.tscn

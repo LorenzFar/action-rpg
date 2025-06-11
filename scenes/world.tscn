@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://p22qasxcdweh"]
+[gd_scene load_steps=15 format=3 uid="uid://p22qasxcdweh"]
 
 [ext_resource type="Texture2D" uid="uid://duw0j84rc863a" path="res://assets/World/GrassBackground.png" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cuyypa6bfkt8n" path="res://assets/World/bush.tscn" id="2_4wyf3"]
@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://obfpoqjvfkti" path="res://assets/Player/player.tscn" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://wj6c6k7lwoht" path="res://assets/Enemies/bat.tscn" id="4_i7141"]
 [ext_resource type="PackedScene" uid="uid://cot7oml1vpd2k" path="res://assets/World/grass.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cv6eswo3vth2h" path="res://assets/UI/HeartUI.tscn" id="8_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://bv3t54ffvm6vq" path="res://assets/World/tree.tscn" id="8_7r4gi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_71j4m"]
 
@@ -741,16 +743,16 @@ layer_0/tile_data = PackedInt32Array(-65528, 0, 0, -65527, 131072, 0, 9, 131072,
 y_sort_enabled = true
 
 [node name="Player" parent="YSort" instance=ExtResource("2_rwgxs")]
-position = Vector2(56.7119, 80)
+position = Vector2(56.7119, 88.5773)
 
 [node name="Bat3" parent="YSort" instance=ExtResource("4_i7141")]
-position = Vector2(168, 24)
+position = Vector2(168.121, 23.6052)
 
 [node name="Bat2" parent="YSort" instance=ExtResource("4_i7141")]
-position = Vector2(184, 160)
+position = Vector2(188.713, 154.109)
 
 [node name="Bat" parent="YSort" instance=ExtResource("4_i7141")]
-position = Vector2(240, 88)
+position = Vector2(238.871, 87.2794)
 
 [node name="Bushes" type="Node2D" parent="YSort"]
 y_sort_enabled = true
@@ -765,10 +767,7 @@ position = Vector2(32, 104)
 position = Vector2(200, 40)
 
 [node name="Bush4" parent="YSort/Bushes" instance=ExtResource("2_4wyf3")]
-position = Vector2(264, 112)
-
-[node name="Bush5" parent="YSort/Bushes" instance=ExtResource("2_4wyf3")]
-position = Vector2(176, 96)
+position = Vector2(256, 112)
 
 [node name="Grass" type="Node2D" parent="YSort"]
 y_sort_enabled = true
@@ -820,3 +819,21 @@ position = Vector2(128, 48)
 [node name="Grass12" parent="YSort/Grass" instance=ExtResource("6_qfnet")]
 y_sort_enabled = true
 position = Vector2(64, 112)
+
+[node name="Trees" type="Node2D" parent="YSort"]
+y_sort_enabled = true
+
+[node name="Tree" parent="YSort/Trees" instance=ExtResource("8_7r4gi")]
+position = Vector2(176, 96)
+
+[node name="Tree2" parent="YSort/Trees" instance=ExtResource("8_7r4gi")]
+position = Vector2(48, 160)
+
+[node name="Tree3" parent="YSort/Trees" instance=ExtResource("8_7r4gi")]
+position = Vector2(288, 160)
+
+[node name="HeartUI" parent="." instance=ExtResource("8_4mrxx")]
+offset_left = 4.0
+offset_top = 3.0
+offset_right = 62.0
+offset_bottom = 15.0

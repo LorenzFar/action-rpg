@@ -13,6 +13,7 @@
 #include "Hitbox.h"
 #include "Hurtbox.h"
 #include "PlayerDetectionZone.h"
+#include "HeartUI.h"
 
 using namespace godot;
 
@@ -29,6 +30,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(Bat);
 	GDREGISTER_CLASS(Hitbox);
 	GDREGISTER_CLASS(Hurtbox);
+	GDREGISTER_CLASS(HeartUI);
 	GDREGISTER_CLASS(PlayerDetectionZone);
 }
 

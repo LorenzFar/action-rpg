@@ -21,6 +21,8 @@ namespace godot {
         int getMaxHealth() const;
         void setHealth(int value);
         int getHealth() const;
+        void _init_health();
+
     };
 
 } // namespace godot
