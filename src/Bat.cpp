@@ -14,11 +14,15 @@ namespace godot {
     }
 
     void Bat::_ready(){
+        rng.instantiate();
+        rng->randomize();
+
         hurtbox = get_node<Hurtbox>("Hurtbox");
         stats = get_node<Stats>("Stats");
         playerDetectionZone = get_node<PlayerDetectionZone>("PlayerDetectionZone");
         animatedSprite2D = get_node<AnimatedSprite2D>("AnimatedSprite2D");
         softCollision = get_node<SoftCollision>("SoftCollision");
+        wanderController = get_node<WanderController>("WanderController");
         
         hurtbox -> connect(
             "area_entered",
@@ -29,7 +33,12 @@ namespace godot {
             "no_health",
             Callable(this, "_on_Stats_no_health")
         );
+        
+        //Append to random list for randomly picking state
+        random_list.append(IDLE);
+        random_list.append(WANDER);
 
+        state = pick_random_state();
     }
 
     void Bat::_physics_process(double delta) {
@@ -39,39 +48,77 @@ namespace godot {
 
         switch (state)
         {
-        case IDLE:
-            velocity = velocity.move_toward(Vector2(), FRICTION * delta);
-            seek_player();
-            break;
-        case WANDER:
-            break;
-        case CHASE:
-            if(playerDetectionZone -> can_see_player()){
-                Player* player = playerDetectionZone -> getPlayer();
-                Vector2 direction = (player -> get_global_position() - get_global_position()).normalized();
-                velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
+            case IDLE: {
+                velocity = velocity.move_toward(Vector2(), FRICTION * delta);
+                seek_player();
+
+                if (wanderController->get_time_left() == 0) {
+                    wanderController -> update_target_position();
+                    update_wander();
+                }
+                break;
             }
-            else{
-                state = IDLE;
+
+            case WANDER: {
+                seek_player();
+
+                if (wanderController->get_time_left() == 0) {
+                    wanderController -> update_target_position();
+                    update_wander();
+                }
+
+                accelerate_towards_point(wanderController -> get_target_position(), delta);
+
+                if(get_global_position().distance_to(wanderController -> get_target_position()) <= WANDER_TARGET_RANGE ){
+                    update_wander();
+                }
+                break;
             }
-            //Flip Animation if player on the right side 
-            animatedSprite2D->set_flip_h(velocity.x < 0);
-        default:
-            break;
+
+            case CHASE: {
+                if (playerDetectionZone->can_see_player()) {
+                    Player* player = playerDetectionZone->getPlayer();
+                    accelerate_towards_point(player -> get_global_position(), delta);
+                } else {
+                    state = IDLE;
+                }
+
+                // Flip Animation if player is on the right side 
+                animatedSprite2D->set_flip_h(velocity.x < 0);
+                break;
+            }
+
+            default:
+                break;
         }
 
-        if(softCollision -> is_colliding()){
-            velocity += softCollision -> get_push_vector() * delta * 400;
+        if (softCollision->is_colliding()) {
+            velocity += softCollision->get_push_vector() * delta * 400;
         }
 
         set_velocity(velocity);
         move_and_slide();
     }
 
+    void Bat::accelerate_towards_point(Vector2 point, double delta){
+        Vector2 direction = get_global_position().direction_to(point);
+        velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta);
+        animatedSprite2D->set_flip_h(velocity.x < 0);
+    }
+
+    void Bat::update_wander(){
+        state = pick_random_state();
+        wanderController->start_wander_timer(rng -> randf_range(1, 3));
+    }
+
     void Bat::seek_player(){
         if(playerDetectionZone -> can_see_player()){
             state = CHASE;
         }
+    }
+
+    int Bat::pick_random_state(){
+        return random_list.pick_random();
     }
 
     void Bat::_on_area_entered(Hitbox* area) {

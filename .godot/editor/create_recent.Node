@@ -1,3 +1,6 @@
+WanderController
+Timer
+Node2D
 RemoteTransform2D
 CanvasLayer
 Camera2D
@@ -5,11 +8,7 @@ SoftCollision
 CollisionShape2D
 Area2D
 Sprite2D
-Node2D
 StaticBody2D
 HeartUI
 TextureRect
 Control
-Timer
-PlayerDetectionZone
-Effect

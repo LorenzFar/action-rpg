@@ -34,6 +34,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(HeartUI);
 	GDREGISTER_CLASS(PlayerDetectionZone);
 	GDREGISTER_CLASS(SoftCollision);
+	GDREGISTER_CLASS(WanderController);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

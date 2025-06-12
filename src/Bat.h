@@ -2,6 +2,7 @@
 #define BAT_H
 
 #include "Hitbox.h"
+#include "WanderController.h"
 #include "Hurtbox.h"
 #include "SoftCollision.h"
 #include "Stats.h"
@@ -21,6 +22,7 @@ class Bat : public CharacterBody2D {
     static constexpr int MAX_SPEED = 50;
     static constexpr int ACCELERATION = 300;
     static constexpr int FRICTION = 200; 
+    static constexpr int WANDER_TARGET_RANGE = 4;
 
     enum {
         IDLE,
@@ -29,6 +31,8 @@ class Bat : public CharacterBody2D {
     };
 
     private:
+        Ref<RandomNumberGenerator> rng;
+
         Vector2 velocity = Vector2();
         Vector2 knockBack = Vector2();
         Hurtbox* hurtbox = nullptr;
@@ -36,7 +40,9 @@ class Bat : public CharacterBody2D {
         AnimatedSprite2D* animatedSprite2D = nullptr;
         PlayerDetectionZone* playerDetectionZone = nullptr;
         Stats* stats = nullptr;
+        WanderController* wanderController = nullptr;
         int state = CHASE;
+        Array random_list;
 
         void create_death_effect();
 
@@ -49,6 +55,9 @@ class Bat : public CharacterBody2D {
         void _on_area_entered(Hitbox* area);
         void _on_Stats_no_health();
         void seek_player();
+        void accelerate_towards_point(Vector2 point, double delta);
+        int pick_random_state();
+        void update_wander();
     };
 
 }

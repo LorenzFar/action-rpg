@@ -68,13 +68,16 @@ radius = 4.0
 radius = 5.0
 
 [node name="Bat" type="Bat"]
+position = Vector2(8.57356, 16.7391)
 collision_layer = 16
+velocity = Vector2(-36.496, 34.1767)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_hygg8")
 autoplay = "default"
 frame_progress = 0.0172903
 offset = Vector2(0, -12)
+flip_h = true
 
 [node name="ShadowSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_jekii")
@@ -111,6 +114,11 @@ shape = SubResource("CircleShape2D_f1t7x")
 
 [node name="CollisionShape2D" parent="SoftCollision" index="0"]
 shape = SubResource("CircleShape2D_mosdq")
+
+[node name="WanderController" type="WanderController" parent="."]
+
+[node name="Timer" type="Timer" parent="WanderController"]
+wait_time = 2.0
 
 [editable path="Hurtbox"]
 [editable path="PlayerDetectionZone"]
