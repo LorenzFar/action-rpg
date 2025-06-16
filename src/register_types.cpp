@@ -16,6 +16,7 @@
 #include "HeartUI.h"
 #include "SoftCollision.h"
 #include "PlayerHurtSound.h"
+#include "PlayerCamera.h"
 
 using namespace godot;
 
@@ -37,6 +38,7 @@ void initialize_gdextension_types(ModuleInitializationLevel p_level)
 	GDREGISTER_CLASS(SoftCollision);
 	GDREGISTER_CLASS(WanderController);
 	GDREGISTER_CLASS(PlayerHurtSound);
+	GDREGISTER_CLASS(PlayerCamera);
 }
 
 void uninitialize_gdextension_types(ModuleInitializationLevel p_level) {

@@ -1,3 +1,7 @@
+PlayerCamera
+Camera2D
+Node
+Marker2D
 AnimationPlayer
 PlayerHurtSound
 AudioStreamPlayer
@@ -6,9 +10,5 @@ Timer
 Node2D
 RemoteTransform2D
 CanvasLayer
-Camera2D
 SoftCollision
 CollisionShape2D
-Area2D
-Sprite2D
-StaticBody2D

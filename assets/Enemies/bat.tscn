@@ -129,9 +129,8 @@ _data = {
 }
 
 [node name="Bat" type="Bat"]
-position = Vector2(45.2557, 81.0976)
+position = Vector2(8.23564, 103.077)
 collision_layer = 16
-velocity = Vector2(-24.0151, 31.1561)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_hygg8")
