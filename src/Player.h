@@ -11,6 +11,10 @@
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/classes/area2d.hpp>
 #include <godot_cpp/variant/vector2.hpp>
+#include <godot_cpp/classes/packed_scene.hpp> 
+#include <godot_cpp/classes/resource_loader.hpp> 
+#include <godot_cpp/classes/scene_tree.hpp>
+#include <godot_cpp/classes/engine.hpp>
 
 namespace godot {
 
@@ -37,8 +41,10 @@ class Player : public CharacterBody2D {
         Stats* stats = nullptr;
         Hurtbox* hurtbox = nullptr;
         AnimationPlayer* animationPlayer = nullptr;
+        AnimationPlayer* blinkAnimationPlayer = nullptr;
         AnimationTree* animationTree = nullptr;
         AnimationState* animationState = nullptr;
+        Ref<PackedScene> hurtSoundScene;
 
         int state = MOVE;
 
@@ -59,6 +65,8 @@ class Player : public CharacterBody2D {
         void _ready() override;
         virtual void _process(double delta) override;
         void _on_area_entered(Hitbox* area);
+        void _on_Hurtbox_invincibility_started();
+        void _on_Hurtbox_invincibility_ended();
     };
 
 }

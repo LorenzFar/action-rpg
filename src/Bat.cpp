@@ -11,12 +11,16 @@ namespace godot {
     void Bat::_bind_methods() {
         ClassDB::bind_method(D_METHOD("_on_area_entered", "area"), &Bat::_on_area_entered);
         ClassDB::bind_method(D_METHOD("_on_Stats_no_health"), &Bat::_on_Stats_no_health);
+
+        ClassDB::bind_method(D_METHOD("_on_Hurtbox_invincibility_started"), &Bat::_on_Hurtbox_invincibility_started);
+        ClassDB::bind_method(D_METHOD("_on_Hurtbox_invincibility_ended"), &Bat::_on_Hurtbox_invincibility_ended);
     }
 
     void Bat::_ready(){
         rng.instantiate();
         rng->randomize();
 
+        animationPlayer = get_node<AnimationPlayer>("AnimationPlayer");
         hurtbox = get_node<Hurtbox>("Hurtbox");
         stats = get_node<Stats>("Stats");
         playerDetectionZone = get_node<PlayerDetectionZone>("PlayerDetectionZone");
@@ -27,6 +31,16 @@ namespace godot {
         hurtbox -> connect(
             "area_entered",
             Callable(this, "_on_area_entered")
+        );
+
+        hurtbox -> connect (
+            "invincibility_started",
+            Callable(this, "_on_Hurtbox_invincibility_started")
+        );
+
+        hurtbox -> connect (
+            "invincibility_ended",
+            Callable(this, "_on_Hurtbox_invincibility_ended")
         );
 
         stats -> connect(
@@ -130,6 +144,8 @@ namespace godot {
         knockBack = direction * KNOCKBACK_SPEED;
 
         hurtbox -> create_hit_effect();
+
+        hurtbox -> start_invincibility(0.4);
     }
 
     void Bat::create_death_effect(){
@@ -156,6 +172,14 @@ namespace godot {
     void Bat::_on_Stats_no_health(){
         queue_free();
         create_death_effect();
+    }
+
+    void Bat::_on_Hurtbox_invincibility_started(){
+        animationPlayer -> play("Start");
+    }
+
+    void Bat::_on_Hurtbox_invincibility_ended(){
+        animationPlayer -> play("Stop");
     }
 
 }

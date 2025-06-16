@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "PlayerHurtSound.h"
 #include <godot_cpp/classes/input.hpp>
 #include <godot_cpp/classes/input_map.hpp>
 #include <godot_cpp/classes/node.hpp>
@@ -12,10 +13,14 @@ namespace godot {
         ClassDB::bind_method(D_METHOD("attack_animation_finished"), &Player::attack_animation_finished);
         ClassDB::bind_method(D_METHOD("_on_area_entered", "area"), &Player::_on_area_entered);
         ClassDB::bind_method(D_METHOD("roll_animation_finished"), &Player::roll_animation_finished);
+
+        ClassDB::bind_method(D_METHOD("_on_Hurtbox_invincibility_started"), &Player::_on_Hurtbox_invincibility_started);
+        ClassDB::bind_method(D_METHOD("_on_Hurtbox_invincibility_ended"), &Player::_on_Hurtbox_invincibility_ended);
     }
 
     void Player::_ready(){
         animationPlayer = get_node<AnimationPlayer>("AnimationPlayer");
+        blinkAnimationPlayer = get_node<AnimationPlayer>("BlinkAnimationPlayer");
         animationTree = get_node<AnimationTree>("AnimationTree");
         hurtbox = get_node<Hurtbox>("Hurtbox");
         stats = get_node<Stats>(NodePath("/root/PlayerStats"));
@@ -36,7 +41,19 @@ namespace godot {
             Callable(this, "_on_area_entered")
         );
 
+        hurtbox -> connect (
+            "invincibility_started",
+            Callable(this, "_on_Hurtbox_invincibility_started")
+        );
+
+        hurtbox -> connect (
+            "invincibility_ended",
+            Callable(this, "_on_Hurtbox_invincibility_ended")
+        );
+
         animationTree->set_active(true);
+
+        hurtSoundScene = ResourceLoader::get_singleton()->load("res://assets/Player/player_hurt_sound.tscn");
 
         set_process(true); // Ensure _process is called each frame
     }
@@ -135,9 +152,21 @@ namespace godot {
     }
 
     void Player::_on_area_entered(Hitbox* area) {
-        stats->setHealth(stats -> getHealth() - 1);
-        hurtbox -> start_invincibility(0.5);
+        stats->setHealth(stats -> getHealth() - area -> getDamage());
+        hurtbox -> start_invincibility(0.6);
         hurtbox -> create_hit_effect();
+
+        Node *hurtSoundNode = hurtSoundScene->instantiate();
+        PlayerHurtSound *hurtSound = Object::cast_to<PlayerHurtSound>(hurtSoundNode);
+        get_tree() -> get_current_scene() -> add_child(hurtSound);
+    }
+
+    void Player::_on_Hurtbox_invincibility_started(){
+        blinkAnimationPlayer -> play("Start");
+    }
+
+    void Player::_on_Hurtbox_invincibility_ended(){
+        blinkAnimationPlayer -> play("Stop");
     }
 
 }

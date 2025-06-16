@@ -753,28 +753,30 @@ position = Vector2(56.7119, 93.2773)
 remote_path = NodePath("../../../Camera2D")
 
 [node name="Bat3" parent="YSort" instance=ExtResource("4_i7141")]
-position = Vector2(168.121, 23.6052)
+position = Vector2(187.934, 10.4765)
+velocity = Vector2(7.62939e-06, -0.637326)
 
 [node name="Bat2" parent="YSort" instance=ExtResource("4_i7141")]
-position = Vector2(188.713, 154.109)
+position = Vector2(189.762, 157.027)
 
 [node name="Bat" parent="YSort" instance=ExtResource("4_i7141")]
-position = Vector2(238.871, 87.2794)
+position = Vector2(246.938, 69.4448)
+velocity = Vector2(-34.2541, 12.1789)
 
 [node name="Bushes" type="Node2D" parent="YSort"]
 y_sort_enabled = true
 
 [node name="Bush" parent="YSort/Bushes" instance=ExtResource("2_4wyf3")]
-position = Vector2(80, 48)
+position = Vector2(80, 40)
 
 [node name="Bush2" parent="YSort/Bushes" instance=ExtResource("2_4wyf3")]
 position = Vector2(32, 104)
 
 [node name="Bush3" parent="YSort/Bushes" instance=ExtResource("2_4wyf3")]
-position = Vector2(200, 40)
+position = Vector2(208, 40)
 
 [node name="Bush4" parent="YSort/Bushes" instance=ExtResource("2_4wyf3")]
-position = Vector2(256, 112)
+position = Vector2(248, 112)
 
 [node name="Grass" type="Node2D" parent="YSort"]
 y_sort_enabled = true

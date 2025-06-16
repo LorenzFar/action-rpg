@@ -1,2 +1,3 @@
-res://assets/Overlap/soft_collision.tscn
+res://assets/Player/player.tscn
+res://WhiteColor.gdshader
 res://assets/Enemies/bat.tscn

@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bksw1qj80hf2k"]
+[gd_scene load_steps=6 format=3 uid="uid://bksw1qj80hf2k"]
 
 [ext_resource type="Texture2D" uid="uid://ynf0bt4ar8pi" path="res://assets/Effects/HitEffect.png" id="1_qww2t"]
+[ext_resource type="AudioStream" uid="uid://dsx2mjygw1gm3" path="res://assets/Music and Sounds/Hit.wav" id="2_s3i6y"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3i6y"]
 atlas = ExtResource("1_qww2t")
@@ -28,4 +29,10 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_w7pet")
 animation = &"Animation"
 autoplay = "Animation"
+frame = 1
+frame_progress = 1.0
 offset = Vector2(0, -8)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_s3i6y")
+autoplay = true

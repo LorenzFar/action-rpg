@@ -9,6 +9,7 @@
 #include "PlayerDetectionZone.h"
 #include <godot_cpp/classes/character_body2d.hpp>
 #include <godot_cpp/classes/animated_sprite2d.hpp>
+#include <godot_cpp/classes/animation_player.hpp>
 #include <godot_cpp/core/class_db.hpp>
 #include <godot_cpp/variant/vector2.hpp>
 #include <godot_cpp/classes/area2d.hpp>
@@ -35,6 +36,7 @@ class Bat : public CharacterBody2D {
 
         Vector2 velocity = Vector2();
         Vector2 knockBack = Vector2();
+        AnimationPlayer* animationPlayer = nullptr;
         Hurtbox* hurtbox = nullptr;
         SoftCollision* softCollision = nullptr;
         AnimatedSprite2D* animatedSprite2D = nullptr;
@@ -58,6 +60,8 @@ class Bat : public CharacterBody2D {
         void accelerate_towards_point(Vector2 point, double delta);
         int pick_random_state();
         void update_wander();
+        void _on_Hurtbox_invincibility_started();
+        void _on_Hurtbox_invincibility_ended();
     };
 
 }
